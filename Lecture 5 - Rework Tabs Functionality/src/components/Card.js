@@ -34,7 +34,13 @@ const  Card = (props) => {
 
             <div className="w-[40px] h-[40px] bg-white rounded-full absolute top-[9rem] right-2 flex justify-center items-center">
                 <button onClick={clickHandler}>
-                    <FcLike fontSize= "1.4rem" />
+                   {
+                        likedCourses.includes(course.id) ? (
+                            <FcLike className="text-2xl" />
+                        ) : (
+                            <FcLike className="text-2xl opacity-50" />
+                        )
+                   }
                 </button>
             </div>
             </div>
