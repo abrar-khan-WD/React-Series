@@ -1,0 +1,37 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+}
+
+.navbar{
+  background-color: #282c34;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+.nav-links{
+  display: flex;
+  gap: 60px;
+  justify-content: space-between;
+  color: #fff;
+}
+.nav-links li{
+  list-style: none;
+  color: #fff;
+}
+.nav-link{
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+}
+.active{
+  color: #61dafb;
+}
