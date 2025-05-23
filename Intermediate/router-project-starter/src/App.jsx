@@ -1,31 +1,27 @@
-import React from "react";
+import React from 'react';
 import "./App.css";
-import Navbar from "./components/Navbar";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
-import { useState } from "react";
-
+import Navbar from './components/Navbar.jsx';
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import { useState } from 'react';
 
 const App = () => {
- // Check if user is logged in
-  const [loggedIn, setLoggedIn] = useState(false);
-
-
-  return(
-    <div className="">
-      <Navbar loggedIn = {loggedIn} setLoggedIn = {setLoggedIn} />
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  return (
+    <div>
+      <Navbar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
 
       <Routes>
-        <Route path = "/" element ={<Home/>} />
-        <Route path = "/login" element ={<Login/>} />
-        <Route path = "/signup" element ={<Signup/>} />
-        <Route path = "/dashboard" element ={<Dashboard/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;
