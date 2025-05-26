@@ -9,15 +9,15 @@ import Dashboard from './pages/Dashboard.jsx';
 import { useState } from 'react';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setLoggedIn] = useState(true);
   return (
     <div>
-      <Navbar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
+      <Navbar isLoggedIn = {isLoggedIn} setLoggedIn = {setLoggedIn}/>
 
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<Signup/>} />
+        <Route path="/login" element={<Login setLoggedIn={setLoggedIn}/>} />
+        <Route path="/signup" element={<Signup setLoggedIn={setLoggedIn}/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </div>

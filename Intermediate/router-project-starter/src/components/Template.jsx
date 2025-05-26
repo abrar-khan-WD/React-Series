@@ -1,7 +1,10 @@
 import React from "react";
 import frameImage from "../assets/frame.png";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 
-const Template = (title, desc1, desc2, formtype, image, setLoggedIn ) => {
+
+const Template = ({title, desc1, desc2, formtype, image, setLoggedIn} ) => {
     return (
         <div>
             <h1>{title}</h1>
@@ -11,7 +14,7 @@ const Template = (title, desc1, desc2, formtype, image, setLoggedIn ) => {
             </p>
 
             {
-                formtype === "signup" ? (<SignupForm/>) : (<LoginForm/>)
+                formtype === "signup" ? (<SignupForm setLoggedIn={setLoggedIn} />) : (<LoginForm setLoggedIn={setLoggedIn} />)
             }
 
             <div>

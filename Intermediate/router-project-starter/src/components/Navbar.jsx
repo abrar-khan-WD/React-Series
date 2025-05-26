@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 const Navbar = (props) => {
     let isLoggedIn = props.isLoggedIn;
-    let setIsLoggedIn = props.setIsLoggedIn;
+    let setLoggedIn = props.setLoggedIn;
     return (
 
         <div className="flex items-center px-4 py-2 bg-[#000] shadow-sm">
@@ -53,7 +53,7 @@ const Navbar = (props) => {
                      isLoggedIn &&
                     <Link to={"/"} className="bg-blue-500 text-white px-4 py-2 rounded">
                         <button onClick={() => {
-                            setIsLoggedIn(false);
+                            setLoggedIn(false);
                             toast.success("Logged out successfully", {
                                 position: "top-right",
                                style: { marginTop: "50px" }, // Add this line for top spacing

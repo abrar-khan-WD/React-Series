@@ -1,13 +1,19 @@
 import React from "react";
+import Template from "../components/Template";
+import signupImage from "../assets/signup.png";
 
-const Signup = () => {
+const Signup = ({setLoggedIn}) => {
     return(
-        <div>
-            <h1>Welcome to the Signup Page</h1>
-            <p>This is the Signup page of our application.</p>
-            <p>Feel free to explore Signup page!</p>
-        </div>
+         <Template
+       title="Welcome Back"
+       desc1 = "Build Skills for today,tmorrow and beyond"
+       desc2 = "Education to future-proof your career"
+       image = {signupImage}
+       formtype="signup"
+       setLoggedIn={setLoggedIn}
+       />
     )
+     
 }
 
 export default Signup;
