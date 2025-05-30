@@ -8,13 +8,13 @@ const Navbar = (props) => {
     let setLoggedIn = props.setLoggedIn;
     return (
 
-        <div className="flex items-center px-4 py-2 bg-[#000] shadow-sm">
+        <div className="flex justify-between items-center w-11/12 max-w-[1160px] py-4 mx-auto">
             <Link to="/">
                 <img src={logo} height={32} width={160} loading="lazy" alt="Image Not Founds" />
             </Link>
 
-            <nav className="flex gap-4 ml-auto">
-                <ul className="flex gap-16">
+            <nav>
+                <ul className="flex text-richblack-100 gap-x-6"> 
                     <li className="text-white">
                         <Link to="/">Home</Link>
                     </li>
@@ -30,20 +30,20 @@ const Navbar = (props) => {
 
             {/* Login , Signup, LogOut, Dashboard */}
 
-            <div className="flex gap-4 ml-auto">
+            <div className="flex items-center gap-x-4"> 
                 {
                     !isLoggedIn &&
-                    <Link to={"/login"} className="bg-blue-500 text-white px-4 py-2 rounded">
-                        <button>
-                            Login
+                    <Link to={"/login"} >
+                        <button className="bg-richblack-800 text-richblack-100 px-[12px] py-[8px] rounded-[8px] border border-richblack-700"> 
+                            Log in
                         </button>
                     </Link>
                 }
 
                 {
                      !isLoggedIn &&
-                    <Link to={"/signup"} className="bg-blue-500 text-white px-4 py-2 rounded">
-                        <button>
+                    <Link to={"/signup"}>
+                        <button className="bg-richblack-800 text-richblack-100 px-[12px] py-[8px] rounded-[8px] border border-richblack-700">
                             Signup
                         </button>
                     </Link>
@@ -51,8 +51,9 @@ const Navbar = (props) => {
 
                 {
                      isLoggedIn &&
-                    <Link to={"/"} className="bg-blue-500 text-white px-4 py-2 rounded">
-                        <button onClick={() => {
+                    <Link to={"/"}>
+                        <button className="bg-richblack-800 text-richblack-100 px-[12px] py-[8px] rounded-[8px] border border-richblack-700" 
+                        onClick={() => {
                             setLoggedIn(false);
                             toast.success("Logged out successfully", {
                                 position: "top-right",
@@ -72,8 +73,8 @@ const Navbar = (props) => {
 
                 {
                      isLoggedIn &&
-                    <Link to={"/dashboard"} className="bg-blue-500 text-white px-4 py-2 rounded">
-                        <button>
+                    <Link to={"/dashboard"} >
+                        <button className="bg-richblack-800 text-richblack-100 px-[12px] py-[8px] rounded-[8px] border border-richblack-700">
                             Dashboard
                         </button>
                     </Link>
