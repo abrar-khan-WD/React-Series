@@ -4,22 +4,31 @@ import React, { useState } from "react";
 import {baseUrl} from "../baseUrl";
 
 
+export const AppContext = createContext();
+
+
 export default function AppContextProvider({ children }) {
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const [post, setPost] = useState([]);
-  const [totalPage, setTotalPage] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [post, setPost] = useState([]);
+    const [totalPage, setTotalPage] = useState(null);
 
     // data filling through api call
-    async function fetchData() {
+    async function fetchData(page = 1, tag = null, category) {
         setLoading(true);
-        let url = `${baseUrl}page=${page}`;
+        let url = `${baseUrl}?page=${page}`;
+        if (tag){
+           url += `&tag=${tag}`
+        }
+        if(category){
+            url += `&category = ${category}`
+        }
         try{
             const result = await fetch(url);
             const data = await result.json()
             console.log(data);
-            setPost(data.posts)
             setPage(data.page)
+            setPost(data.posts)
             setTotalPage(data.totalPages)
         }
         catch(error){
@@ -31,31 +40,29 @@ export default function AppContextProvider({ children }) {
         setLoading(false);
     }
 
-    function pagChangeHandler(page){
+    function pageChangeHandler(page){
         setPage(page);
-        fetchData();
+        fetchData(page);
     }
  
 
   // This is th snapshot of the data
-  const value = {
-    loading,
-    setLoading,
-    page,
-    setPage,
-    post,
-    setPost,
-    totalPage,
-    setTotalPage,
-    fetchData,
-    pagChangeHandler
-  };
+    const value = {
+        loading,
+        setLoading,
+        page,
+        setPage,
+        post,
+        setPost,
+        totalPage,
+        setTotalPage,
+        fetchData,
+        pageChangeHandler
+    }; 
 
   return(
     <AppContext.Provider value ={value}>
-        {children}
-    </AppContext.Provider>
+            {children}
+        </AppContext.Provider>
   )
 }
-
-export const AppContext = createContext();
