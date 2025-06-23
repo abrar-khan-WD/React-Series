@@ -1,25 +1,25 @@
 import React, { useContext, useEffect } from "react";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Blog from "./components/Blog";
+import Blogs from "./components/Blogs";
 import { AppContext } from "./context/AppContext";
-import "./App.css";
+
+
 
 const App = () => {
-  const {fetchData} = useContext(AppContext);
+ const {fetchBlogPosts} = useContext(AppContext);
 
-  useEffect(() => {
-    fetchData();
+ useEffect(() => {
+    fetchBlogPosts();
   }, []);
 
-  return (
-    <Routes>
-      <Route path = "/" element = {<Home/>} />
-      <Route path = "/blog/:blogId" element = {<BlogPage/>} />
-      <Route path = "/category/:category" element = {<CategoryPage/>} />
-      <Route path = "/tags/:tag"  element = {<TagPage/>} />
-    </Routes>
-  );
+
+  return(
+    <div>
+      <Header />
+      <Blogs />
+     
+    </div>
+  )
 }
 
 export default App;

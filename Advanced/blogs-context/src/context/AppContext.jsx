@@ -1,68 +1,54 @@
-import { createContext } from "react";
+import React, { createContext, useState } from "react";
+import { baseUrl } from "../baseUrl";
 import { toast } from "react-toastify";
-import React, { useState } from "react";
-import {baseUrl} from "../baseUrl";
-
 
 export const AppContext = createContext();
 
-
 export default function AppContextProvider({ children }) {
-    const [loading, setLoading] = useState(false);
-    const [page, setPage] = useState(1);
-    const [post, setPost] = useState([]);
-    const [totalPage, setTotalPage] = useState(null);
+  const [loading, setloading] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(null);
 
-    // data filling through api call
-    async function fetchData(page = 1, tag = null, category) {
-        setLoading(true);
-        let url = `${baseUrl}?page=${page}`;
-        if (tag){
-           url += `&tag=${tag}`
-        }
-        if(category){
-            url += `&category = ${category}`
-        }
-        try{
-            const result = await fetch(url);
-            const data = await result.json()
-            console.log(data);
-            setPage(data.page)
-            setPost(data.posts)
-            setTotalPage(data.totalPages)
-        }
-        catch(error){
-            toast.error("Something went wrong while fetching data");
-            setPage(1);
-            setPost([]);
-            setTotalPage(null);
-        } 
-        setLoading(false);
+  // data filling through api call
+  async function fetchBlogPosts(page = 1) {
+    setloading(true);
+    let url = `${baseUrl}?page=${page}`;
+    try {
+      const result = await fetch(url);
+      const data = await result.json();
+      console.log("New Data", data);
+      setPage(data.page);
+      setPosts(data.posts);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      toast.error("Something went wrong while fetching posts");
+      setPosts([]);
+      setTotalPages(null);
+      setPage(1);
     }
+    setloading(false);
+  }
 
-    function pageChangeHandler(page){
-        setPage(page);
-        fetchData(page);
-    }
- 
+  function pageChangeHandler(page) {
+    setPage(page);
+    fetchBlogPosts(page);
+  }
 
-  // This is th snapshot of the data
-    const value = {
-        loading,
-        setLoading,
-        page,
-        setPage,
-        post,
-        setPost,
-        totalPage,
-        setTotalPage,
-        fetchData,
-        pageChangeHandler
-    }; 
+  const value = {
+    loading,
+    setloading,
+    posts,
+    setPosts,
+    page,
+    setPage,
+    totalPages,
+    setTotalPages,
+    fetchBlogPosts,
+    pageChangeHandler,
+  };
 
-  return(
-    <AppContext.Provider value ={value}>
-            {children}
-        </AppContext.Provider>
-  )
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
+
+export { AppContextProvider };

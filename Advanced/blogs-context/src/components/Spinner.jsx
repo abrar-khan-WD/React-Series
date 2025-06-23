@@ -1,14 +1,13 @@
 import React from "react";
-import "./Spinner.css"; // Importing the CSS for spinner styles
+import './Spinner.css'; // Assuming you have a CSS file for styling the spinner
 
 const Spinner = () => {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="spinner">
+    return(
+        <div>
+            <div className="spinner"></div>
 
-      </div>
-    </div>
-  );
+        </div>
+    )
 }
 
 export default Spinner;
