@@ -24,7 +24,7 @@ const BlogPage = () => {
       const data = await response.json();
       console.log("Fetched Data:", data);
       setBlog(data.blog);
-      setRelatedBlogs(data.relatedBlogs || []);
+      setRelatedBlogs(data.relatedBlogs);
     } catch (error) {
       toast.error("Failed to fetch blog details");
       setBlog(null);

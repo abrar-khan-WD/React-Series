@@ -6,17 +6,16 @@ import { AppContext } from "../context/AppContext";
 
 
 const BlogDetails = ({ post }) => {
-  if (!post) return <p>Loading blog...</p>;
 
   return (
-    <div>
+    <div className="mt-[50px]" >
       <NavLink to={`/blog/${post.id}`}>
         <span>{post.title}</span>
       </NavLink>
 
       <p>
         By <span>{post.author}</span> on{" "}
-        <NavLink to={`/categories/${(post.category || "").replaceAll(" ", "-")}`}>
+        <NavLink to={`/categories/${post.category.replaceAll(" ", "-")}`}>
           <span>{post.category}</span>
         </NavLink>
       </p>
@@ -26,8 +25,9 @@ const BlogDetails = ({ post }) => {
       <p>{post.content}</p>
 
       <div>
-        {post.tags && post.tags.map((tag, index) => (
-          <NavLink key={index} to={`/tags/${tag.replaceAll(" ", "-")}`}>
+        {post.tags.map((tag, index) => (
+          <NavLink key={index} to={`/tags/${tag.replaceAll(" ", "-")}`
+          }>
             <span>{`#${tag}`}</span>
           </NavLink>
         ))}

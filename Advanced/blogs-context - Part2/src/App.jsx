@@ -14,30 +14,32 @@ import TagPage from "./pages/TagPage";
 
 const App = () => {
  const {fetchBlogPosts} = useContext(AppContext);
- const [searchQuery, setSearchQuery] = useSearchParams();
+ const [searchParams, setSearchParams] = useSearchParams();
  const location = useLocation();
- const tags = "/tags";
- const categories = "/categories";
+  const {page} = useContext(AppContext);
+  
+    // Fetch blog posts when the component mounts or when the page changes
+    // This will also handle fetching posts based on tags or categories
+    // by checking the current URL path
 
  useEffect(() => {
-    const page = searchQuery.get("page") || 1;
+    const page = searchParams.get("page") ?? 1; // ?? by default set to 1
 
-    if (location.pathname.includes(tags)) {
-      const tag = location.pathname.split("/").at(-1).replace("-", "");
-      fetchBlogPosts({ tag, page });      
+    if (location.pathname.includes("tags")) {
+      const tag = location.pathname.split("/").at(-1).replace("-", " ");
+      fetchBlogPosts(Number(page),null, tag);
     }
 
-    else if (location.pathname.includes(categories)) {
-      const category = location.pathname.split("/").at(-1).replace("-","");
-      fetchBlogPosts({ category, page });
+    else if (location.pathname.includes("categories")) {
+      const category = location.pathname.split("/").at(-1).replace("-"," ");
+      fetchBlogPosts(Number(page), null, category);
     }
 
     else{
-      fetchBlogPosts({ page });
+      fetchBlogPosts(Number(page) );
     }
 
   }, [location.pathname, location.search]);
-
 
 
   return(

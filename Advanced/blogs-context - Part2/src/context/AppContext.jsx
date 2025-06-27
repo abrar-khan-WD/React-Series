@@ -3,45 +3,56 @@ import { baseUrl } from "../baseUrl";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-
-
 export const AppContext = createContext();
 
 export default function AppContextProvider({ children }) {
-  const [loading, setloading] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [loading, setloading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const navigate = useNavigate();
 
   // data filling through api call
-  async function fetchBlogPosts(page = 1,category,tags=null) {
+  const fetchBlogPosts = async(page = 1,tag = null, category) => {
     setloading(true);
     let url = `${baseUrl}?page=${page}`;
+    if(tag) {
+      url += `&tag=${tag}`;
+    }
     if(category) {
       url += `&category=${category}`;
     }
-    if(tags) {
-      url += `&tags=${tags}`;
-    }
+    console.log("API URL:", url); // Add this line
+    
     try {
       const result = await fetch(url);
       const data = await result.json();
-      console.log("New Data", data);
-      setPage(data.page);
-      setPosts(data.posts);
-      setTotalPages(data.totalPages);
-    } catch (error) {
-      toast.error("Something went wrong while fetching posts");
-      setPosts([]);
-      setTotalPages(null);
-      setPage(1);
-    }
-    setloading(false);
+      if(!data.posts || data.posts.length === 0) {
+         console.log("Api Response de bhai", data);
+        throw new Error("No posts found");
+      }
+        
+        setPage(data.page);
+        setPosts(data.posts);
+        setTotalPages(data.totalPages);
+      }
+      
+   catch (error) {
+  if (error.message === "No posts found") {
+    toast.info("No posts found in this category.");
+  } else {
+    toast.error("Something went wrong while fetching posts.");
   }
-
-  function pageChangeHandler(page) {
-    navigate({search: `page=${page}`})
+  setPosts([]);
+  setTotalPages(null);
+  setPage(1);
+}
+    setloading(false);
+  } 
+    
+ 
+  const pageChangeHandler = (page) => {
+    navigate({search: `?page=${page}`})
     setPage(page);
   }
 

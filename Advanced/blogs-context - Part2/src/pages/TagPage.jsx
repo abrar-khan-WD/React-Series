@@ -11,18 +11,17 @@ const TagPage = () => {
     // Extract tag from the current URL path
     const location = useLocation();
     const tag = location.pathname.split("/").at(-1);
-
     const {fetchBlogPosts} = useContext(AppContext);
 
     useEffect(() => {
         // Fetch blog posts based on the tag
-        fetchBlogPosts({ tag });
-    }, [tag]);
+        fetchBlogPosts(1, tag, null);
+    }, [location.pathname, location.search]);
 
     return (
         <div>
             <Header />
-            <div>
+            <div>   
                 <button onClick={() => navigate(-1)}>
                     Back
                 </button>
