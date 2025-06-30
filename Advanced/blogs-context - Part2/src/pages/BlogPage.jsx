@@ -7,6 +7,7 @@ import BlogDetails from "../components/BlogDetails";
 import Spinner from "../components/Spinner";
 
 const BlogPage = () => {
+  const newBaseUrl = 'https://codehelp-apis.vercel.app/api/get-blog';
   const [blog, setBlog] = useState(null);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ const BlogPage = () => {
 
   async function fetchRelatedBlogs() {
     setLoading(true);
-    let url = `${baseUrl}?blogId=${blogId}`;
+    let url = `${newBaseUrl}?blogId=${blogId}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -34,7 +35,7 @@ const BlogPage = () => {
   }
 
   useEffect(() => {
-    if (blogId) {
+    if(blogId) {
       fetchRelatedBlogs();
     }
   }, [location.pathname]);

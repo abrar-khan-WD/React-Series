@@ -7,7 +7,7 @@ import BlogDetails from "./BlogDetails";
 const Blogs = () => {
   const { loading, posts } = useContext(AppContext);
   return (
-    <div className="w-11/12 max-w-[635px] h-full flex flex-col gap-y-3 justify-center items-center p-3 mt-16 mb-20 ">
+    <div className="flex flex-col w-full max-w-[655px] mx-auto px-4 gap-y-11 mt-[90px] mb-[98px]">
       {loading ? (
         <Spinner />
       ) : posts.length === 0 ? (

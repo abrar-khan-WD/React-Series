@@ -16,7 +16,6 @@ const App = () => {
  const {fetchBlogPosts} = useContext(AppContext);
  const [searchParams, setSearchParams] = useSearchParams();
  const location = useLocation();
-  const {page} = useContext(AppContext);
   
     // Fetch blog posts when the component mounts or when the page changes
     // This will also handle fetching posts based on tags or categories
@@ -27,7 +26,7 @@ const App = () => {
 
     if (location.pathname.includes("tags")) {
       const tag = location.pathname.split("/").at(-1).replace("-", " ");
-      fetchBlogPosts(Number(page),null, tag);
+      fetchBlogPosts(Number(page), tag);
     }
 
     else if (location.pathname.includes("categories")) {

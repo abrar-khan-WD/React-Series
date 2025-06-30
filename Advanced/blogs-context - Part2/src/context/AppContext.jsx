@@ -13,7 +13,7 @@ export default function AppContextProvider({ children }) {
   const navigate = useNavigate();
 
   // data filling through api call
-  const fetchBlogPosts = async(page = 1,tag = null, category) => {
+  const fetchBlogPosts = async(page = 1,tag,category) => {
     setloading(true);
     let url = `${baseUrl}?page=${page}`;
     if(tag) {
@@ -27,11 +27,9 @@ export default function AppContextProvider({ children }) {
     try {
       const result = await fetch(url);
       const data = await result.json();
-      if(!data.posts || data.posts.length === 0) {
+      if(!data.posts || data.posts.length === 0) 
+         throw new Error("No posts found");
          console.log("Api Response de bhai", data);
-        throw new Error("No posts found");
-      }
-        
         setPage(data.page);
         setPosts(data.posts);
         setTotalPages(data.totalPages);

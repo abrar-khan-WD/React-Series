@@ -8,27 +8,28 @@ import { AppContext } from "../context/AppContext";
 const BlogDetails = ({ post }) => {
 
   return (
-    <div className="mt-[50px]" >
+    <div className="flex flex-col gap-y-1 border shadow-md p-4 cursor-pointer" >
       <NavLink to={`/blog/${post.id}`}>
-        <span>{post.title}</span>
+        <span className="font-bold">{post.title}</span>
       </NavLink>
 
-      <p>
-        By <span>{post.author}</span> on{" "}
+      <p className="text-xs">
+        By <span className="italic">{post.author}</span> on{" "}
         <NavLink to={`/categories/${post.category.replaceAll(" ", "-")}`}>
-          <span>{post.category}</span>
+          <span className="underline font-bold">{post.category}</span>
         </NavLink>
       </p>
 
-      <p>Posted on <span>{post.date}</span></p>
+      <p className="text-xs pt-1">Posted on <span></span>
+        <span>{ post.date}</span></p>
 
-      <p>{post.content}</p>
+      <p className="pt-4 text-[13px] font-normal">{post.content}</p>
 
-      <div>
+      <div className="flex flex-row gap-x-1 pt-4 text-[13px] font-normal">
         {post.tags.map((tag, index) => (
           <NavLink key={index} to={`/tags/${tag.replaceAll(" ", "-")}`
           }>
-            <span>{`#${tag}`}</span>
+            <span className="text-blue-700 underline text-xs">{`#${tag}`}</span>
           </NavLink>
         ))}
       </div>
