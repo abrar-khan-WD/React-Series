@@ -19,9 +19,3 @@ const App = () => {
 }
 
 export default App;
-
-
-
-// add_action('wp_head', function() {
-//     echo '<meta name="google-site-verification" content="google185998210ad1854d.html" />' . "\n";
-// });

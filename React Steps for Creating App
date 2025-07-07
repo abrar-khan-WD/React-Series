@@ -1,5 +1,0 @@
-Create Folder in the desired path 
-Open Terminal and mentioned the above path there
-Cmd - cd 'PATH WOULD BE MENTIONED OVER HERE'
-Create React App - npx crate-react-app 'FileName'
-npm run start
