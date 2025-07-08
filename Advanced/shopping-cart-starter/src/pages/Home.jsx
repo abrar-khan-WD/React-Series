@@ -29,17 +29,17 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-20 mb-20">
       {loading ? (
         <Spinner />
       ) : posts.length > 0 ? (
-        <div>
+        <div className="grid grid-cols-4  max-w-6xl p-2 mx-auto space-y-10 space-x-5 min-h-[90vh]  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {posts.map((posts) => (
             <Product key={posts.id} posts={posts} />
           ))}
         </div>
       ) : (
-        <div>
+        <div className="flex items-center justify-center">
           <h1>No Products Found</h1>
           <p>Please check back later.</p>
         </div>
